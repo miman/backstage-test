@@ -1,0 +1,29 @@
+openapi: 3.0.0
+info:
+  title: Weather Proxy API
+  description: A simple API to fetch weather data.
+  version: 1.0.0
+servers:
+  - url: http://localhost:3001
+paths:
+  /weather:
+    get:
+      summary: Get current weather
+      description: Returns the weather condition for the default location.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  location:
+                    type: string
+                    example: Stockholm
+                  temperature:
+                    type: number
+                    example: 20
+                  condition:
+                    type: string
+                    example: Sunny

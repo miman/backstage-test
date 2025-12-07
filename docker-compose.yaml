@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  backstage:
+    build:
+      context: ./backstage-app
+      dockerfile: ../Dockerfile.source
+    ports:
+      - "7007:7007"
+      - "3000:3000"
+    environment:
+      - PORT=7007
+      - NODE_ENV=development
+    command: ["node", "packages/backend", "--config", "app-config.yaml", "--config", "app-config.local.yaml"]
+    volumes:
+      - ./weather-proxy:/app/weather-proxy-source
+      # We mount the local config to fix auth and other local settings
+      - ./app-config.local.yaml:/app/app-config.local.yaml
+
+  weather-proxy:
+    build: ./weather-proxy
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001

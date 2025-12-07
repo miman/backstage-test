@@ -1,0 +1,21 @@
+app:
+  baseUrl: http://localhost:7007
+
+backend:
+  # Maintain same baseUrl as backend listener
+  baseUrl: http://localhost:7007
+  cors:
+    origin: http://localhost:7007
+
+auth:
+  providers:
+    guest:
+      dangerouslyAllowOutsideOfDevelopment: true
+
+catalog:
+  locations:
+    # Auto-register the weather-proxy component from the mounted volume
+    - type: file
+      target: /app/weather-proxy-source/catalog-info.yaml
+      rules:
+        - allow: [Component, API, Resource, Location, System, Group, User]

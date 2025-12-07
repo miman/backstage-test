@@ -1,0 +1,28 @@
+app:
+  baseUrl: http://localhost:7007
+
+backend:
+  baseUrl: http://localhost:7007
+  listen:
+    port: 7007
+  cors:
+    origin: http://localhost:7007
+
+techdocs:
+  builder: 'local'
+  generator:
+    runIn: 'local'
+  publisher:
+    type: 'local'
+
+catalog:
+  locations:
+    # We can pre-register the component here if we want! 
+    # But the user asked for a "push script".
+    # We will leave this clean or add a "Location" kind.
+    []
+
+integrations:
+  gitlab:
+    - host: gitlab.com
+      token: none

@@ -1,0 +1,37 @@
+FROM node:20-bookworm
+
+WORKDIR /app
+
+# Install dependencies for building native modules (like isolate-vm)
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends python3 make g++ build-essential libsqlite3-dev && \
+    rm -rf /var/lib/apt/lists/*
+
+# Copy the entire repository
+COPY . .
+
+# Install dependencies
+# We use --network-timeout because the monorepo install is large
+ENV YARN_ENABLE_IMMUTABLE_INSTALLS=false
+RUN yarn install --network-timeout 1000000
+
+# We skip the specific build step and run directly in dev mode for simplicity and reliability 
+# with the raw monorepo, as a full production build of the framework requires more steps.
+# However, if the user wants "built" app, 'yarn workspace backend start' is the closest single-command equivalent
+# for a raw clone without setting up a full CI pipeline.
+# To perform a "production build" inside Docker would require running the backstage-cli build command.
+
+# Let's try to build it to be more "production-like" if possible, but fallback to start if strictly needed.
+# Converting to a production build inside Docker:
+# 1. Build the backend bundle
+RUN yarn workspace example-backend build
+
+# 2. Extract the bundle
+WORKDIR /app
+RUN tar xzf packages/backend/dist/bundle.tar.gz
+
+# Expose default port
+EXPOSE 7007
+
+# Run the backend
+CMD ["node", "packages/backend"]
