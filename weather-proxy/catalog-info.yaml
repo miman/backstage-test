@@ -20,7 +20,7 @@ spec:
   type: service
   lifecycle: experimental
   owner: weather-team
-  system: system
+  system: weather-system
   test: test
   providesApis:
     - weather-api
@@ -39,7 +39,7 @@ metadata:
 spec:
   type: database
   owner: weather-team
-  system: system
+  system: weather-system
 
 
 
