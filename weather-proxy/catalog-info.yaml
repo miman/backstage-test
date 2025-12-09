@@ -3,14 +3,24 @@ kind: Component
 metadata:
   name: weather-proxy
   description: A weather proxy service for fetching weather data.
+  links:
+    - url: https://www.google.com
+      title: Google
+      icon: dashboard    
   annotations:
-    github.com/project-slug: example/weather-proxy
+    github.com/project-slug: miman/backstage-test
+    backstage.io/source-location: url:https://github.com/miman/backstage-test/tree/main/weather-proxy
     backstage.io/techdocs-ref: dir:.
+  tags:
+    - nodejs
+    - typescript
+    - proxy
+    - weather
 spec:
   type: service
   lifecycle: experimental
   owner: weather-team
-  system: weather-system
+  system: system
   test: test
   providesApis:
     - weather-api
@@ -19,47 +29,6 @@ spec:
   dependsOn:
     - resource:weather-db
 
----
-apiVersion: backstage.io/v1alpha1
-kind: API
-metadata:
-  name: weather-api
-  description: The Weather Proxy API definition
-spec:
-  type: openapi
-  lifecycle: experimental
-  owner: weather-team
-  system: weather-system
-  definition: |
-    openapi: 3.0.0
-    info:
-      title: Weather Proxy API
-      description: A simple API to fetch weather data.
-      version: 1.0.0
-    servers:
-      - url: http://localhost:3001
-    paths:
-      /weather:
-        get:
-          summary: Get current weather
-          description: Returns the weather condition for the default location.
-          responses:
-            '200':
-              description: Successful response
-              content:
-                application/json:
-                  schema:
-                    type: object
-                    properties:
-                      location:
-                        type: string
-                        example: Stockholm
-                      temperature:
-                        type: number
-                        example: 20
-                      condition:
-                        type: string
-                        example: Sunny
 
 ---
 apiVersion: backstage.io/v1alpha1
@@ -70,48 +39,7 @@ metadata:
 spec:
   type: database
   owner: weather-team
-  system: weather-system
+  system: system
 
----
-apiVersion: backstage.io/v1alpha1
-kind: API
-metadata:
-  name: openweathermap-api
-  description: External OpenWeatherMap API
-  links:
-    - title: Documentation
-      url: https://openweathermap.org/api
-spec:
-  type: openapi
-  lifecycle: production
-  owner: weather-team
-  system: weather-system
-  definition: |
-    openapi: 3.0.0
-    info:
-      title: OpenWeatherMap API
-      version: 1.0.0
-    paths: {}
 
----
-apiVersion: backstage.io/v1alpha1
-kind: System
-metadata:
-  name: weather-system
-  description: The Weather System that groups all weather services
-spec:
-  owner: weather-team
 
----
-apiVersion: backstage.io/v1alpha1
-kind: Group
-metadata:
-  name: weather-team
-  description: The team responsible for weather services
-spec:
-  type: team
-  profile:
-    displayName: Weather Team
-    email: weather-team@example.com
-    picture: https://avatars.dicebear.com/api/identicon/weather-team.svg
-  children: []

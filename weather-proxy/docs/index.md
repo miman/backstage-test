@@ -21,3 +21,7 @@ Returns the current weather for a hardcoded location.
   "condition": "Sunny"
 }
 ```
+
+## Test info
+
+Here is some more info: [test info](test.md)

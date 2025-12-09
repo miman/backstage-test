@@ -1,0 +1,12 @@
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: weather-team
+  description: The team responsible for weather services
+spec:
+  type: team
+  profile:
+    displayName: Weather Team
+    email: teams@example.com
+    picture: https://avatars.dicebear.com/api/identicon/teams.svg
+  children: []

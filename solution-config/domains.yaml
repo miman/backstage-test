@@ -1,0 +1,7 @@
+apiVersion: backstage.io/v1alpha1
+kind: Domain
+metadata:
+  name: integrations
+  description: A domain for all integration services
+spec:
+  owner: weather-team

@@ -1,0 +1,61 @@
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: weather-api
+  description: The Weather Proxy API definition
+spec:
+  type: openapi
+  lifecycle: experimental
+  owner: weather-team
+  system: system
+  definition: |
+    openapi: 3.0.0
+    info:
+      title: Weather Proxy API
+      description: A simple API to fetch weather data.
+      version: 1.0.0
+    servers:
+      - url: http://localhost:3001
+    paths:
+      /weather:
+        get:
+          summary: Get current weather
+          description: Returns the weather condition for the default location.
+          responses:
+            '200':
+              description: Successful response
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      location:
+                        type: string
+                        example: Stockholm
+                      temperature:
+                        type: number
+                        example: 20
+                      condition:
+                        type: string
+                        example: Sunny
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: openweathermap-api
+  description: External OpenWeatherMap API
+  links:
+    - title: Documentation
+      url: https://openweathermap.org/api
+spec:
+  type: openapi
+  lifecycle: production
+  owner: weather-team
+  system: system
+  definition: |
+    openapi: 3.0.0
+    info:
+      title: OpenWeatherMap API
+      version: 1.0.0
+    paths: {}

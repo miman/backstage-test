@@ -12,6 +12,13 @@ auth:
     guest:
       dangerouslyAllowOutsideOfDevelopment: true
 
+techdocs:
+  builder: 'local'
+  generator:
+    runIn: 'local'
+  publisher:
+    type: 'local'
+
 catalog:
   locations:
     # Auto-register the weather-proxy component from the mounted volume
@@ -19,3 +26,19 @@ catalog:
       target: /app/weather-proxy-source/catalog-info.yaml
       rules:
         - allow: [Component, API, Resource, Location, System, Group, User]
+    - type: file
+      target: /app/weather-proxy-source/backstage/weather-api.yaml
+      rules:
+        - allow: [Component, API, Resource, Location, System, Group, User]
+    - type: file
+      target: /app/solution-config/system.yaml
+      rules:
+        - allow: [System]
+    - type: file
+      target: /app/solution-config/teams.yaml
+      rules:
+        - allow: [Group]
+    - type: file
+      target: /app/solution-config/domains.yaml
+      rules:
+        - allow: [Domain]

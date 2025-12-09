@@ -1,6 +1,14 @@
-# Backstage Weather Proxy Demo
+# Backstage Test
 
-This project demonstrates a simple Node.js "Weather Proxy" application integrated with a local instance of [Spotify Backstage](https://backstage.io).
+This project is used to test configuration in backstage using a dummy application.
+
+1. It deploys a local instance of [Backstage](https://backstage.io).
+2. It registers a component in the catalog (weather-proxy).
+3. It registers an API in the catalog.
+4. It registers a resource in the catalog.
+5. It registers a system in the catalog.
+6. It registers a group in the catalog.
+7. It registers a domain in the catalog.
 
 ## Prerequisites
 
@@ -12,7 +20,8 @@ This project demonstrates a simple Node.js "Weather Proxy" application integrate
 1.  **Start the Environment**
     Run the following command in the root directory to start Backstage and the Weather Proxy:
     ```bash
-    docker-compose up -d --build
+    - install-docker.bat (windows)
+    - install-docker.sh (linux)
     ```
     *   Backstage will be available at: [http://localhost:7007](http://localhost:7007)
     *   Weather Proxy will be running at: [http://localhost:3001](http://localhost:3001)

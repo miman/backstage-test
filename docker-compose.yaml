@@ -16,6 +16,7 @@ services:
       - ./weather-proxy:/app/weather-proxy-source
       # We mount the local config to fix auth and other local settings
       - ./app-config.local.yaml:/app/app-config.local.yaml
+      - ./solution-config:/app/solution-config
 
   weather-proxy:
     build: ./weather-proxy
