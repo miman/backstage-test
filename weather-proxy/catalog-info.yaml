@@ -1,45 +1,10 @@
 apiVersion: backstage.io/v1alpha1
-kind: Component
+kind: Location
 metadata:
   name: weather-proxy
   description: A weather proxy service for fetching weather data.
-  links:
-    - url: https://www.google.com
-      title: Google
-      icon: dashboard    
-  annotations:
-    github.com/project-slug: miman/backstage-test
-    backstage.io/source-location: url:https://github.com/miman/backstage-test/tree/main/weather-proxy
-    backstage.io/techdocs-ref: dir:.
-  tags:
-    - nodejs
-    - typescript
-    - proxy
-    - weather
 spec:
-  type: service
-  lifecycle: experimental
-  owner: weather-team
-  system: weather-system
-  test: test
-  providesApis:
-    - weather-api
-  consumesApis:
-    - openweathermap-api
-  dependsOn:
-    - resource:weather-db
-
-
----
-apiVersion: backstage.io/v1alpha1
-kind: Resource
-metadata:
-  name: weather-db
-  description: The database for the Weather Proxy service
-spec:
-  type: database
-  owner: weather-team
-  system: weather-system
-
-
-
+  targets:
+    - ./backstage/databases.yaml
+    - ./backstage/weather-api.yaml
+    - ./backstage/components.yaml
