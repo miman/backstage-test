@@ -1,5 +1,14 @@
 .git
 node_modules
+.yarn/cache
+.yarn/install-state.gz
 packages/backend/dist
 packages/app/dist
+packages/*/node_modules
 plugins/*/dist
+plugins/*/node_modules
+# Exclude large documentation and microsite folders to speed up build
+docs
+microsite
+*.md
+!README.md

@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 services:
   backstage:
@@ -11,12 +11,20 @@ services:
     environment:
       - PORT=7007
       - NODE_ENV=development
-    command: ["node", "packages/backend", "--config", "app-config.yaml", "--config", "app-config.local.yaml"]
+    command:
+      [
+        "node",
+        "packages/backend",
+        "--config",
+        "app-config.yaml",
+        "--config",
+        "/app/host/app-config.local.yaml",
+      ]
     volumes:
-      - ./weather-proxy:/app/weather-proxy-source
-      # We mount the local config to fix auth and other local settings
-      - ./app-config.local.yaml:/app/app-config.local.yaml
-      - ./solution-config:/app/solution-config
+      - ./:/app/host:ro
+      - ./solution-config:/app/solution-config:ro
+      - ./weather-proxy:/app/weather-proxy:ro
+      # Note: app-config.local.yaml is read from the host mount at /app/host (no rebuild needed for edits)
 
   weather-proxy:
     build: ./weather-proxy

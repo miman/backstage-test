@@ -9,6 +9,11 @@ IF EXIST "backstage-app" (
     echo [INFO] "backstage-app" directory already exists.
     echo [INFO] Pulling latest changes from official repo...
     pushd backstage-app
+    REM If there's a local .dockerignore, discard local changes so git pull won't fail
+    if exist ".dockerignore" (
+        echo [INFO] Discarding local changes to .dockerignore
+        git checkout -- .dockerignore 2>nul || git restore .dockerignore 2>nul
+    )
     git pull
 ) ELSE (
     echo [INFO] Cloning official Backstage repository...
@@ -26,6 +31,14 @@ IF %ERRORLEVEL% NEQ 0 (
 echo.
 echo [INFO] Patching .dockerignore for source build...
 copy /Y ..\source.dockerignore .dockerignore
+
+echo.
+echo [INFO] Copying app-config.local.yaml into backstage-app (Docker build context)...
+if exist "..\app-config.local.yaml" (
+    copy /Y ..\app-config.local.yaml app-config.local.yaml >nul
+) else (
+    echo [WARN] ..\app-config.local.yaml not found. Docker will fail if docker-compose.yaml references it.
+)
 popd
 
 

@@ -1,0 +1,9 @@
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: weather-db
+  description: The database for the Weather Proxy service
+spec:
+  type: database
+  owner: weather-team
+  system: weather-system

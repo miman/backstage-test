@@ -23,15 +23,11 @@ catalog:
   locations:
     # Auto-register the weather-proxy component from the mounted volume
     - type: file
-      target: /app/weather-proxy-source/catalog-info.yaml
+      target: /app/weather-proxy/catalog-info.yaml
       rules:
         - allow: [Component, API, Resource, Location, System, Group, User]
     - type: file
-      target: /app/weather-proxy-source/backstage/weather-api.yaml
-      rules:
-        - allow: [Component, API, Resource, Location, System, Group, User]
-    - type: file
-      target: /app/solution-config/system.yaml
+      target: /app/solution-config/systems.yaml
       rules:
         - allow: [System]
     - type: file

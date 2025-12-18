@@ -1,0 +1,47 @@
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: weather-api
+  description: The Weather Proxy API definition
+spec:
+  type: openapi
+  lifecycle: experimental
+  owner: weather-team
+  system: weather-system
+  definition:
+    $text: https://github.com/miman/backstage-test/blob/main/weather-proxy/api/openapi.yaml
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: openweathermap-api
+  description: External OpenWeatherMap API
+  links:
+    - title: Documentation
+      url: https://openweathermap.org/api
+spec:
+  type: openapi
+  lifecycle: production
+  owner: weather-team
+  system: weather-system
+  definition: |
+    openapi: 3.0.0
+    info:
+      title: OpenWeatherMap API
+      version: 1.0.0
+    paths: {}
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: jsonschema-api
+  description: JSON Schema API
+spec:
+  type: jsonSchema
+  lifecycle: production
+  owner: weather-team
+  system: weather-system
+  definition:
+    $text: https://github.com/miman/backstage-test/blob/main/weather-proxy/api/example.schema.json
