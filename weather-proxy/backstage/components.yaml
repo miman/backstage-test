@@ -24,6 +24,7 @@ spec:
   test: test
   providesApis:
     - weather-api
+    - jsonschema-api
   consumesApis:
     - openweathermap-api
   dependsOn:
@@ -31,4 +32,4 @@ spec:
   # subcomponentOf: weather-system
   targets:
     - ./backstage/databases.yaml
-    - ./backstage/weather-api.yaml
+    - ./backstage/apis.yaml

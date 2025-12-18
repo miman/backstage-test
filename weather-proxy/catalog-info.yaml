@@ -6,5 +6,5 @@ metadata:
 spec:
   targets:
     - ./backstage/databases.yaml
-    - ./backstage/weather-api.yaml
+    - ./backstage/apis.yaml
     - ./backstage/components.yaml
